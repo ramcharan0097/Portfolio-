@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ram Charan — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Bebas+Neue&family=Space+Mono&family=Bricolage+Grotesque:wght@600;800&family=Fraunces:ital,wght@0,500;1,500&family=Manrope:wght@400;600&family=Instrument+Serif:ital@0;1&family=Unbounded:wght@500;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07060b;--ink:#f6f3ff;--mut:#a7a1c4;--lime:#e6cf9f;--vio:#8b5cff;--cor:#c97b63;box-sizing:border-box}
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--bg);color:var(--ink);font-family:'Outfit',system-ui,sans-serif}
+body{height:750vh}
+h1,h2,h3,.disp{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+.glow{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 40%,#2a1470aa,transparent 60%),radial-gradient(ellipse at 85% 90%,#c97b6322,transparent 50%)}
+.stage{position:fixed;inset:0;perspective:900px;perspective-origin:50% 45%;overflow:hidden;z-index:2}
+.rig{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.layer{position:absolute;left:50%;top:50%;width:min(92vw,980px);transform-style:preserve-3d;will-change:opacity;padding:0 4px}
+.hero{height:min(78vh,720px)}
+.big{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) translateZ(-140px);font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.02em;font-size:clamp(84px,27vw,300px);line-height:.82;text-align:center;color:transparent;-webkit-text-stroke:1px #e6cf9fcc;white-space:nowrap}
+.big b{color:var(--lime);-webkit-text-stroke:0;opacity:.14;display:block}
+.me{position:absolute;left:50%;bottom:0;height:88%;transform:translateX(-50%) translateZ(60px);filter:drop-shadow(0 0 40px #8b5cffaa) drop-shadow(0 30px 40px #000)}
+.ring{position:absolute;left:50%;top:48%;width:min(80vw,520px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%) translateZ(-60px);background:conic-gradient(from 0deg,var(--vio),var(--lime),var(--cor),var(--vio));filter:blur(40px);opacity:.55;animation:spin 14s linear infinite}
+@keyframes spin{to{rotate:360deg}}
+.chip{position:absolute;padding:9px 16px;border-radius:99px;font-size:13px;background:#ffffff14;border:1px solid #ffffff30;backdrop-filter:blur(10px);animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{translate:0 -14px}}
+.sub{position:absolute;bottom:-4%;left:0;right:0;text-align:center;color:var(--mut);font-size:14px;letter-spacing:.2em;text-transform:uppercase}
+.panel{transform:translate(-50%,-50%)}
+.hero{transform:translate(-50%,-50%)}
+.k{color:var(--lime);font-size:13px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:16px}
+h2{font-size:clamp(40px,10vw,96px);line-height:.98;font-weight:400;margin-bottom:24px;letter-spacing:-.01em}
+h2 em{font-style:italic;color:var(--lime)}
+.lead{font-size:clamp(17px,2.6vw,26px);font-weight:300;line-height:1.5;color:#d8d3f0;max-width:700px}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.tags span{padding:10px 18px;border-radius:99px;border:1px solid #e6cf9f66;color:var(--lime);font-size:14px}
+.cards{display:grid;gap:16px;transform-style:preserve-3d}
+@media(min-width:760px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card{padding:24px;border-radius:22px;background:linear-gradient(150deg,#ffffff1a,#ffffff06);border:1px solid #ffffff22;backdrop-filter:blur(14px)}
+.card:nth-child(1){transform:translateZ(60px)}.card:nth-child(3){transform:translateZ(-40px)}
+.card h3{font-size:18px;margin:10px 0 8px}.card p{color:var(--mut);font-size:15px;line-height:1.5}
+.card .n{font-family:'Unbounded';color:var(--cor);font-size:13px}
+.mail{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(24px,7vw,64px);word-break:break-all;color:var(--lime);text-decoration:none;display:block;margin:6px 0 26px}
+.btn{display:inline-block;padding:15px 30px;border-radius:99px;background:var(--lime);color:#07060b;font-weight:500;text-decoration:none;box-shadow:0 0 50px #e6cf9f66}
+.shape{position:absolute;left:50%;top:50%;transform-style:preserve-3d}
+.cube{width:90px;height:90px;animation:rot 12s linear infinite}
+.cube i{position:absolute;inset:0;border:1.5px solid #8b5cffcc;background:#8b5cff14}
+.cube i:nth-child(1){transform:translateZ(45px)}.cube i:nth-child(2){transform:rotateY(90deg) translateZ(45px)}.cube i:nth-child(3){transform:rotateY(180deg) translateZ(45px)}.cube i:nth-child(4){transform:rotateY(-90deg) translateZ(45px)}.cube i:nth-child(5){transform:rotateX(90deg) translateZ(45px)}.cube i:nth-child(6){transform:rotateX(-90deg) translateZ(45px)}
+@keyframes rot{from{transform:var(--p)}to{transform:var(--p) rotateX(360deg) rotateY(360deg)}}
+.torus{width:130px;height:130px;border-radius:50%;border:3px solid var(--cor);box-shadow:0 0 30px #c97b6377,inset 0 0 20px #c97b6355;animation:rot 9s linear infinite}
+#hud{position:fixed;z-index:5;left:0;right:0;top:0;padding:calc(env(safe-area-inset-top,0px) + 16px) 22px 0;display:flex;justify-content:space-between;font-size:13px;color:var(--mut);pointer-events:none}
+#hud b{font-family:'Instrument Serif',Georgia,serif;font-size:22px;color:var(--lime)}
+#bar{position:fixed;z-index:6;left:0;bottom:calc(env(safe-area-inset-bottom,0px) + 0px);height:4px;width:0;background:linear-gradient(90deg,var(--vio),var(--lime),var(--cor))}
+#hint{position:fixed;z-index:5;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);text-align:center;font-size:12px;letter-spacing:.3em;color:var(--mut);transition:opacity .4s;pointer-events:none}
+
+.panel{text-align:center}.lead{margin:0 auto}.tags{justify-content:center}.panel h2{margin-bottom:22px}
+.w{display:inline-block;margin-right:.26em;transform:translateY(calc((1 - var(--o,1))*70px*(1 + var(--i)*.35)));opacity:calc(1 - (1 - var(--o,1))*2)}
+.w.e{color:var(--lime)}
+.nav{display:flex;gap:26px;pointer-events:auto}.nav a,#hud b{pointer-events:auto;cursor:pointer;color:var(--ink);position:relative}
+.nav a::after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:100%;background:var(--lime);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.nav a:hover::after{transform:scaleX(1)}
+.grain{position:fixed;inset:-50%;z-index:9;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");animation:gr .8s steps(4) infinite}
+@keyframes gr{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
+.spot{position:fixed;z-index:1;width:520px;height:520px;left:0;top:0;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,#e6cf9f22,transparent 65%);pointer-events:none}
+#cur,#cur2{display:none}
+@media (hover:hover) and (pointer:fine){html,a,*{cursor:none!important}
+#cur,#cur2{display:block;position:fixed;left:0;top:0;z-index:99;pointer-events:none;border-radius:50%}
+#cur{width:8px;height:8px;margin:-4px 0 0 -4px;background:#fff;mix-blend-mode:difference}
+#cur2{width:44px;height:44px;margin:-22px 0 0 -22px;border:1px solid #e6cf9fcc;display:grid;place-items:center;transition:width .35s,height .35s,margin .35s,background .35s}
+#cur2 span{font-size:11px;color:#07060b;font-weight:500;opacity:0;transition:opacity .2s}
+#cur2.h{width:92px;height:92px;margin:-46px 0 0 -46px;background:var(--lime)}#cur2.h span{opacity:1}
+#cur2.p{transform:scale(.8)}}
+.btn{transition:box-shadow .3s}.btn:hover{box-shadow:0 0 80px #e6cf9f}
+.tags span{transition:.3s}.tags span:hover{background:var(--lime);color:#07060b}
+
+
+.win{width:min(70vw,460px);aspect-ratio:16/10;border-radius:12px;background:#0f0d1a;border:1px solid #ffffff38;overflow:hidden;box-shadow:0 20px 50px #000b;margin:0}
+.win .bar{height:9%;min-height:16px;background:#1b1830;display:flex;align-items:center;gap:5px;padding:0 10px}
+.win .bar i{width:7px;height:7px;border-radius:50%;background:#c97b63}.win .bar i+i{background:#ffc83d}.win .bar i+i+i{background:#3dff8b}
+.win .bar u{margin-left:10px;font:10px 'Outfit',system-ui;color:#a39dc4;text-decoration:none;background:#0f0d1a;padding:3px 12px;border-radius:99px}
+.vw{height:91%;overflow:hidden;background:#fff}
+.site{width:440px;font:500 10px/1.35 'Outfit',system-ui;background:var(--bg);color:var(--t);transform-origin:0 0;animation:ps 10s ease-in-out infinite alternate;will-change:transform}
+.win[style*="hidden"] .site{animation-play-state:paused}
+@keyframes ps{from{transform:scale(var(--k,1))}to{transform:scale(var(--k,1)) translateY(-58%)}}
+.site *{box-sizing:border-box;margin:0}
+.nv{display:flex;align-items:center;justify-content:space-between;padding:10px 16px}.nv b{font:800 12px 'Unbounded',system-ui}.nv span{display:flex;gap:12px;opacity:.8}.nv em{font-style:normal}
+.nv a,.bt{display:inline-block;padding:6px 13px;border-radius:99px;background:var(--ac);color:var(--ab,#fff);font-weight:600;text-decoration:none}
+.bt{margin-right:6px}.bt.o{background:none;border:1px solid currentColor;color:inherit}
+.hr{padding:30px 16px;background:var(--hg)}.hr h4{font:800 24px/1.1 'Unbounded',system-ui;margin-bottom:8px}.hr p{max-width:270px;opacity:.85;font-size:11px;margin-bottom:14px}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:14px 16px}.sg.c3{grid-template-columns:repeat(3,1fr)}
+.sg div{text-align:center;padding:10px 4px;border-radius:8px;background:var(--cb)}.sg b{display:block;font:800 15px 'Unbounded',system-ui;color:var(--ac)}
+.sec{padding:14px 16px}.sec h5{font:800 14px 'Unbounded',system-ui;margin-bottom:10px}
+.cg{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.cg div{padding:12px;border-radius:10px;background:var(--cb)}.cg i{font-style:normal;font-size:20px;display:block;margin-bottom:4px}.cg b{display:block;font-size:11px}.cg small{opacity:.7}
+.ml div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #8884}.ml b{color:var(--ac)}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.g3 u{height:64px;border-radius:8px;background:linear-gradient(140deg,#e0a458,#7a3b1a)}
+.ft{padding:16px;text-align:center;background:var(--cb)}
+.t1{--bg:#f4fbfb;--t:#12343b;--ac:#0fb5ae;--cb:#e0f3f2;--hg:linear-gradient(120deg,#bfece9,#eaf9f8)}
+.t2{--bg:#140d09;--t:#f3e6d3;--ac:#e0a458;--ab:#140d09;--cb:#241711;--hg:linear-gradient(120deg,#5a2e14,#140d09)}
+.t3{--bg:#0a0a0a;--t:#fff;--ac:#c6ff3d;--ab:#0a0a0a;--cb:#181818;--hg:linear-gradient(120deg,#2a3d06,#0a0a0a)}
+.t4{--bg:#f6f4ff;--t:#1d1b3a;--ac:#6a4cff;--cb:#e8e3ff;--hg:linear-gradient(120deg,#d9d0ff,#f6f4ff)}
+.t5{--bg:#fff8f2;--t:#2b1d16;--ac:#b8860b;--cb:#f6e9d8;--hg:linear-gradient(120deg,#f2dcc0,#fff8f2)}
+/* performance */
+.ring{filter:none;animation:none;background:radial-gradient(circle,#8b5cff88,#e6cf9f33 45%,transparent 70%)}
+.chip{backdrop-filter:none;background:#1b1830cc}
+.grain{inset:0;animation:none;opacity:.05}
+#cur{mix-blend-mode:normal}
+
+.mail.alt{font-size:clamp(17px,4.4vw,30px);color:var(--mut);margin:0 0 26px}.mail{margin-bottom:6px}
+.tri,.sv,.steps{display:grid;gap:12px;margin:22px auto 0;max-width:900px;text-align:left}
+.tri{grid-template-columns:repeat(3,1fr)}.sv{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}
+@media(min-width:800px){.steps{grid-template-columns:repeat(4,1fr)}.sv{grid-template-columns:repeat(4,1fr)}}
+.tri div,.sv div,.steps div{padding:16px 14px;border-top:1px solid #e6cf9f66;background:linear-gradient(180deg,#ffffff0d,transparent)}
+.tri b,.sv b,.steps b{display:block;font:italic 400 22px/1.1 'Instrument Serif',Georgia,serif;margin:6px 0 6px;color:var(--ink)}
+.tri span,.sv span,.steps span{font-size:13px;line-height:1.5;color:var(--mut);font-weight:300}
+.sv small,.steps small{color:var(--lime);font-size:12px;letter-spacing:.2em}
+@media(max-width:600px){.tri{grid-template-columns:1fr;gap:6px}.tri div{padding:10px 12px}.tri span{font-size:12px}.lead{font-size:16px}.tags{margin-top:16px}.sv div,.steps div{padding:12px 10px}.sv b,.steps b{font-size:19px}.sv span,.steps span{font-size:12px}}
+.cg i.d{width:16px;height:16px;border-radius:5px;background:var(--ac);display:block;margin-bottom:6px;font-size:0}
+.tags span{border-color:#e6cf9f55;font-weight:300;letter-spacing:.04em}
+.lead{font-weight:300}
+
+.layer.s3::before,.layer.s4::before,.layer.s5::before{content:"";position:absolute;left:50%;top:50%;width:150vw;height:150vw;max-width:1900px;max-height:1900px;transform:translate(-50%,-50%) translateZ(-250px);z-index:-1;pointer-events:none}
+.s3::before{background:radial-gradient(circle,#ff6b4a2e,transparent 55%)}.s4::before{background:radial-gradient(circle,#2de2c62a,transparent 55%)}.s5::before{background:radial-gradient(circle,#ff4fa33a,#8b5cff1c 40%,transparent 62%)}
+.panel.s3,.panel.s4{text-align:left}
+/* services */
+.s3 h2{font:800 clamp(34px,6.4vw,78px)/1.02 'Syne',system-ui,sans-serif;letter-spacing:-.03em;margin-bottom:22px}
+.s3 h2 .w.e{color:#ff6b4a}
+.acc .row{border-top:1px solid #ff6b4a55}.acc .row:last-child{border-bottom:1px solid #ff6b4a55}
+.acc button{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:16px;padding:16px 0;cursor:pointer}
+.acc .n{font:400 13px 'Space Mono',monospace;color:#ff6b4a}
+.acc .t{font:800 clamp(22px,4.4vw,46px)/1 'Syne',system-ui;flex:1;color:#f6f3ff;transition:color .3s,transform .3s}
+.acc .row.on .t{color:#ff8a65;transform:translateX(8px)}
+.acc .pl{font-size:28px;color:#ff6b4a;transition:transform .3s}.acc .row.on .pl{transform:rotate(45deg)}
+.acc p{max-height:0;overflow:hidden;opacity:0;transition:max-height .5s,opacity .5s,padding .5s;font:300 16px/1.55 'Outfit',system-ui;color:#d6cdea;padding-left:42px;max-width:640px}
+.acc .row.on p{max-height:140px;opacity:1;padding-bottom:16px}
+/* process */
+.s4 h2{font:400 clamp(48px,10vw,128px)/.88 'Bebas Neue',Impact,sans-serif;letter-spacing:.01em;text-transform:uppercase;margin-bottom:22px}
+.s4 h2 .w.e{color:#2de2c6}
+.stp{position:relative;min-height:clamp(190px,34vw,300px)}
+.stp>div{position:absolute;inset:0;display:flex;align-items:center;gap:clamp(14px,4vw,48px);opacity:0;transform:translateY(26px);transition:opacity .6s,transform .6s;pointer-events:none}
+.stp>div.on{opacity:1;transform:none}
+.stp .sn{font:400 clamp(110px,26vw,300px)/.8 'Bebas Neue',Impact,sans-serif;color:transparent;-webkit-text-stroke:1.5px #2de2c6}
+.stp b{display:block;font:400 clamp(42px,8vw,96px)/.92 'Bebas Neue',Impact,sans-serif;color:#fff;letter-spacing:.01em;text-transform:uppercase}
+.stp span:not(.sn){display:block;font:400 clamp(12px,1.5vw,15px)/1.65 'Space Mono',monospace;color:#9ee9db;max-width:400px;margin-top:10px}
+.trk{display:flex;gap:10px;margin-top:22px}
+.trk button{all:unset;cursor:pointer;flex:1;padding:10px 0 0;border-top:2px solid #ffffff2a;font:400 20px 'Bebas Neue',Impact,sans-serif;letter-spacing:.1em;color:#6f7b8c;transition:.3s}
+.trk button.on{color:#2de2c6;border-color:#2de2c6}
+/* contact */
+.s5::before{background:radial-gradient(circle,#2f8f6c33,#e6cf9f14 40%,transparent 62%)}
+.ccard{max-width:640px;margin:0 auto;text-align:left;background:#f3eee4;color:#15120e;border-radius:28px;padding:clamp(24px,5vw,46px);box-shadow:0 50px 120px #000c,0 0 0 1px #ffffff40 inset;transform-style:preserve-3d;will-change:transform}
+.ccard h2{font:500 clamp(36px,7vw,68px)/1 'Fraunces',Georgia,serif;letter-spacing:-.025em;color:#15120e;margin-bottom:14px}
+.ccard h2 .w.e{color:#1f6b53;font-style:italic}
+.cl{font:400 15px/1.6 'Manrope',system-ui,sans-serif;color:#5b554b;margin-bottom:22px;max-width:460px}
+.er{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0;border-top:1px solid #15120e22;color:#15120e;text-decoration:none;transition:padding .3s}
+.er:last-of-type{border-bottom:1px solid #15120e22}
+.er small{display:block;font:600 10px 'Manrope',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#1f6b53;margin-bottom:4px}
+.er span{font:500 clamp(16px,4.4vw,26px)/1.2 'Fraunces',Georgia,serif;word-break:break-all}
+.er i{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-style:normal;background:#15120e;color:#f3eee4;transition:transform .3s,background .3s}
+.er:hover{padding-left:10px}.er:hover i{transform:rotate(45deg);background:#1f6b53}
+.cr{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.cb{padding:14px 26px;border-radius:99px;background:#15120e;color:#f3eee4;font:600 14px 'Manrope',sans-serif;text-decoration:none;transition:background .3s}.cb:hover{background:#1f6b53}
+.cp{all:unset;cursor:pointer;padding:13px 22px;border-radius:99px;border:1px solid #15120e44;font:600 14px 'Manrope',sans-serif;color:#15120e;transition:.3s}.cp:hover{background:#15120e;color:#f3eee4}
+/* hero 3d */
+.hw{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.gl{position:absolute;inset:-30% -25%;transform:translateZ(-220px);background:radial-gradient(circle at var(--gx,50%) var(--gy,45%),#e6cf9f33,transparent 36%);pointer-events:none}
+.orb{position:absolute;left:50%;top:46%;border-radius:50%;border:1px solid #e6cf9f55;translate:-50% -50%;pointer-events:none}
+.o1{width:min(90vw,640px);aspect-ratio:1;transform:translateZ(-320px);animation:ob 40s linear infinite}
+.o2{width:min(52vw,320px);aspect-ratio:1;transform:translateZ(190px) rotateX(72deg);border-color:#e6cf9f88;animation:ob 18s linear infinite reverse}
+@keyframes ob{to{rotate:360deg}}
+</style></head><body>
+<canvas id="c"></canvas><div class="glow"></div>
+<div id="hud"><b data-go="0">RC</b><div class="nav"><a data-go="1">About</a><a data-go="2">Services</a><a data-go="4">Contact</a></div></div><div id="cur"></div><div id="cur2"><span></span></div><div class="grain"></div><div class="spot" id="spot"></div>
+
+<div class="stage"><div class="rig" id="rig">
+
+<div class="layer hero" data-z="0"><div class="hw" id="hw"><div class="gl"></div><div class="orb o1"></div><div class="orb o2"></div>
+<div class="ring"></div>
+<div class="big">RAM<b>CHARAN</b></div>
+
+<a class="btn hb" data-go="4" style="position:absolute;left:0;right:0;margin:0 auto;width:fit-content;bottom:-2%;transform:translateZ(80px)">Let’s talk →</a>
+<div class="chip" style="left:2%;top:30%;transform:translateZ(120px)">Web Design</div>
+<a class="btn hb" data-go="2" style="position:absolute;left:0;right:0;margin:0 auto;width:fit-content;bottom:-2%;transform:translateZ(80px)">Let’s talk →</a>
+<div class="chip" style="right:2%;top:46%;transform:translateZ(150px);animation-delay:-2s">Front-End</div>
+
+</div></div>
+
+<div class="layer panel" data-z="-1800">
+<h2>Design that <em>works,</em> code that <em>lasts.</em></h2>
+<p class="lead">I’m Ram Charan, a web designer and front-end developer from India. I create clean, fast and responsive websites for businesses and people who want to be taken seriously online.</p>
+<div class="tri"><div><b>Design first</b><span>Every layout starts with clarity, spacing and a strong visual idea.</span></div><div><b>Clean code</b><span>Hand-written HTML and CSS that loads fast and is easy to maintain.</span></div><div><b>Made for mobile</b><span>Sites that look and feel right on every screen, big or small.</span></div></div>
+<div class="tags"><span>HTML</span><span>CSS</span><span>Python</span><span>Java</span><span>UI Design</span><span>Responsive</span></div></div>
+
+<div class="layer panel s3" data-z="-3600"><h2>What I can <em>build for you</em></h2><div class="acc"><div class="row on"><button><span class="n">01</span><span class="t">Business websites</span><span class="pl">+</span></button><p>Clear, professional sites for shops, clinics, restaurants and services that build trust at first glance.</p></div><div class="row"><button><span class="n">02</span><span class="t">Landing pages</span><span class="pl">+</span></button><p>Focused one-page designs with a single goal: turning visitors into customers and enquiries.</p></div><div class="row"><button><span class="n">03</span><span class="t">Portfolio sites</span><span class="pl">+</span></button><p>Personal websites that show your work with style, personality and smooth, memorable motion.</p></div><div class="row"><button><span class="n">04</span><span class="t">Redesigns</span><span class="pl">+</span></button><p>Fresh, modern looks for websites that feel old, slow or hard to use on a phone.</p></div></div></div>
+
+<div class="layer panel s4" data-z="-5400"><h2>How we work <em>together</em></h2><div class="stp"><div><span class="sn">01</span><div><b>Discover</b><span>We talk about your goals, your audience and the feeling you want your website to have.</span></div></div><div><span class="sn">02</span><div><b>Design</b><span>You see a clear visual direction and layout before a single line of code is written.</span></div></div><div><span class="sn">03</span><div><b>Build</b><span>I develop it fast, responsive and polished, with smooth details that feel premium.</span></div></div><div><span class="sn">04</span><div><b>Launch</b><span>We test everything, go live, and I stay available for changes after launch.</span></div></div></div><div class="trk"><button>Discover</button><button>Design</button><button>Build</button><button>Launch</button></div></div>
+
+<div class="layer panel s5" data-z="-7200"><div class="ccard" id="cc">
+<h2>Let’s work <em>together.</em></h2>
+<p class="cl">Have a project in mind, or just want to say hello? Send me a message and I’ll get back to you soon.</p>
+<a class="er" href="mailto:krishnarama64654@gmail.com"><span><small>Email</small>krishnarama64654@gmail.com</span><i>↗</i></a>
+<a class="er" href="mailto:ramcharan0097@outlook.com"><span><small>Alternative</small>ramcharan0097@outlook.com</span><i>↗</i></a>
+<div class="cr"><a class="cb" href="mailto:krishnarama64654@gmail.com">Send a message</a><button class="cp" data-c="krishnarama64654@gmail.com">Copy email</button></div></div></div>
+
+<div class="shape win t1" data-z="-650" style="transform:translate(-62%,-52%) rotateY(24deg) rotateX(4deg)"><div class="bar"><i></i><i></i><i></i><u>carepluscare.in</u></div><div class="vw"><div class="site"><div class="nv"><b>✚ CarePlus</b><span><em>Home</em><em>Doctors</em><em>Departments</em><em>Contact</em></span><a>Book Now</a></div><div class="hr"><h4>Compassionate care,<br>advanced medicine.</h4><p>24/7 emergency, expert doctors and modern facilities under one roof.</p><span class="bt">Book Appointment</span><span class="bt o">Call 108</span></div><div class="sg "><div><b>25+</b>Years</div><div><b>120+</b>Doctors</div><div><b>50k+</b>Patients</div><div><b>24/7</b>Emergency</div></div><div class="sec"><h5>Our Departments</h5><div class="cg "><div><i class="d"></i><b>Cardiology</b><small>Heart care</small></div><div><i class="d"></i><b>Neurology</b><small>Brain & spine</small></div><div><i class="d"></i><b>Orthopedics</b><small>Bone & joint</small></div><div><i class="d"></i><b>Pediatrics</b><small>Child health</small></div></div></div><div class="sec"><h5>Meet our doctors</h5><div class="cg "><div><i class="d"></i><b>Dr. Rao</b><small>Cardiologist</small></div><div><i class="d"></i><b>Dr. Meena</b><small>Pediatrician</small></div></div></div><div class="ft">Need help? Call +91 98765 43210</div></div></div></div>
+<div class="shape win t2" data-z="-1050" style="transform:translate(-8%,-8%) rotateY(-22deg) rotateX(4deg)"><div class="bar"><i></i><i></i><i></i><u>saffronandco.in</u></div><div class="vw"><div class="site"><div class="nv"><b>Saffron &amp; Co.</b><span><em>Menu</em><em>About</em><em>Gallery</em></span><a>Reserve</a></div><div class="hr"><h4>Taste the<br>tradition.</h4><p>Authentic Indian flavours, cooked fresh every single day.</p><span class="bt">Reserve a Table</span></div><div class="sec"><h5>Chef’s Specials</h5><div class="ml"><div>Butter Chicken<b>₹320</b></div><div>Hyderabadi Biryani<b>₹280</b></div><div>Paneer Tikka<b>₹240</b></div><div>Mutton Rogan Josh<b>₹380</b></div><div>Gulab Jamun<b>₹120</b></div></div></div><div class="sec"><div class="g3"><u></u><u></u><u></u></div></div><div class="sg c3"><div><b>4.8★</b>Rating</div><div><b>15+</b>Dishes</div><div><b>11–11</b>Open daily</div></div><div class="ft">12, MG Road · Table booking +91 91234 56780</div></div></div></div>
+<div class="shape win t3" data-z="-2500" style="transform:translate(-60%,-4%) rotateY(22deg) rotateX(4deg)"><div class="bar"><i></i><i></i><i></i><u>ironforgefit.in</u></div><div class="vw"><div class="site"><div class="nv"><b>IRONFORGE</b><span><em>Plans</em><em>Trainers</em><em>Timings</em></span><a>Join Now</a></div><div class="hr"><h4>BUILD YOUR<br>STRONGEST SELF.</h4><p>Join today and get your first 7 days free. No joining fee.</p><span class="bt">Start Free Trial</span></div><div class="sg "><div><b>50+</b>Trainers</div><div><b>200+</b>Machines</div><div><b>6AM</b>Opens</div><div><b>24k</b>Members</div></div><div class="sec"><h5>Membership Plans</h5><div class="cg "><div><i class="d"></i><b>Basic ₹999</b><small>per month</small></div><div><i class="d"></i><b>Pro ₹1,799</b><small>Most popular</small></div><div><i class="d"></i><b>Elite ₹2,999</b><small>Personal trainer</small></div><div><i class="d"></i><b>Diet plan</b><small>Add-on ₹499</small></div></div></div><div class="sec"><h5>Classes</h5><div class="ml"><div>Crossfit · 6:30 AM<b>Book</b></div><div>Zumba · 6:00 PM<b>Book</b></div><div>Yoga · 7:30 AM<b>Book</b></div></div></div><div class="ft">Open 6 AM – 10 PM · All days</div></div></div></div>
+<div class="shape win t4" data-z="-2900" style="transform:translate(-6%,-62%) rotateY(-24deg) rotateX(4deg)"><div class="bar"><i></i><i></i><i></i><u>eduspark.academy</u></div><div class="vw"><div class="site"><div class="nv"><b>EduSpark</b><span><em>Courses</em><em>Mentors</em><em>Placements</em></span><a>Enroll</a></div><div class="hr"><h4>Learn skills that<br>build careers.</h4><p>Live classes, real projects and placement support from industry mentors.</p><span class="bt">Explore Courses</span><span class="bt o">Free Demo</span></div><div class="sg "><div><b>10k+</b>Students</div><div><b>95%</b>Placed</div><div><b>40+</b>Mentors</div><div><b>4.9★</b>Rated</div></div><div class="sec"><h5>Popular Courses</h5><div class="cg "><div><i class="d"></i><b>Web Development</b><small>12 weeks</small></div><div><i class="d"></i><b>Data Science</b><small>16 weeks</small></div><div><i class="d"></i><b>Digital Marketing</b><small>8 weeks</small></div><div><i class="d"></i><b>Spoken English</b><small>6 weeks</small></div></div></div><div class="ft">Next batch starts Monday · Seats limited</div></div></div></div>
+<div class="shape win t5" data-z="-4300" style="transform:translate(-62%,-50%) rotateY(20deg) rotateX(4deg)"><div class="bar"><i></i><i></i><i></i><u>luxefashion.store</u></div><div class="vw"><div class="site"><div class="nv"><b>LUXE</b><span><em>Women</em><em>Men</em><em>Sale</em></span><a>Cart (2)</a></div><div class="hr"><h4>New Season<br>Collection.</h4><p>Handpicked styles with up to 40% off. Free delivery over ₹999.</p><span class="bt">Shop Now</span></div><div class="sec"><h5>Trending now</h5><div class="cg "><div><i class="d"></i><b>Silk Saree</b><small>₹4,999</small></div><div><i class="d"></i><b>Kurta Set</b><small>₹1,899</small></div><div><i class="d"></i><b>Denim Jacket</b><small>₹2,499</small></div><div><i class="d"></i><b>Leather Handbag</b><small>₹1,299</small></div></div></div><div class="sg c3"><div><b>Free</b>Delivery</div><div><b>7-day</b>Returns</div><div><b>COD</b>Available</div></div><div class="ft">Sign up &amp; get 10% off your first order</div></div></div></div>
+</div></div>
+
+<script>
+const rig=document.getElementById('rig'),L=[...document.querySelectorAll('.layer,.shape')];
+L.forEach(e=>{const z=+e.dataset.z;if(e.classList.contains('shape')){const p=getComputedStyle(e).getPropertyValue('--p');e.style.marginLeft='0';e.style.translate='0 0 '+z+'px'}else{e.style.translate='0 0 '+z+'px'}});
+const MAX=7200+300;let cur=0,tgt=0,mx=0,my=0;
+function read(){tgt=scrollY/(document.body.scrollHeight-innerHeight)}
+addEventListener('scroll',read);read();
+addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+addEventListener('deviceorientation',e=>{if(e.gamma!=null){mx=Math.max(-.5,Math.min(.5,e.gamma/60));my=Math.max(-.5,Math.min(.5,(e.beta-45)/90))}});
+let lastC=-1,lastM='',hx=0,hy=0;const HW=document.getElementById('hw'),CC=document.getElementById('cc'),GL=document.querySelector('.hero');
+function frame(){
+ cur+=(tgt-cur)*.1;if(Math.abs(tgt-cur)<.00004)cur=tgt;
+ hx+=(mx-hx)*.1;hy+=(my-hy)*.1;const cam=cur*MAX,k=hx.toFixed(3)+hy.toFixed(3);
+ if(cam!==lastC||k!==lastM){lastC=cam;lastM=k;
+ rig.style.transform='rotateY('+(hx*6+Math.sin(cur*9)*3)+'deg) rotateX('+(-hy*4)+'deg) rotateZ('+Math.sin(cur*6)*1.5+'deg) translateZ('+cam+'px)';
+ HW.style.transform='rotateY('+hx*32+'deg) rotateX('+(-hy*24)+'deg)';CC.style.transform='rotateY('+hx*20+'deg) rotateX('+(-hy*14)+'deg)';
+ L.forEach(e=>{const d=cam+(+e.dataset.z),sh=e.classList.contains('shape');let o=1-Math.abs(d)/(sh?540:900);if(d>350)o=1-(d-350)/250;o=Math.max(0,Math.min(1,o));
+  if(o<.01){if(e._v!==0){e.style.visibility='hidden';e._v=0}}
+  else{if(e._v!==1){e.style.visibility='visible';e._v=1}e.style.opacity=o;if(!sh)e.style.setProperty('--o',o);e.style.pointerEvents=o>.6?'auto':'none'}})}
+ requestAnimationFrame(frame)}
+frame();
+
+// split headlines
+document.querySelectorAll('h2').forEach(h=>{let i=0;const f=document.createDocumentFragment();h.childNodes.forEach(n=>{const e=n.nodeName==='EM';(n.textContent.trim().split(/\s+/)).forEach(w=>{if(!w)return;const s=document.createElement('span');s.className='w'+(e?' e':'');s.style.setProperty('--i',i++);s.textContent=w;f.appendChild(s)})});h.textContent='';h.appendChild(f)});
+// go-to
+function go(k){const m=[0,1800,3600,5400,7200][k];scrollTo({top:m/MAX*(document.body.scrollHeight-innerHeight),behavior:'smooth'})}
+document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();go(+a.dataset.go)}));
+// cursor
+const cu=document.getElementById('cur'),c2=document.getElementById('cur2'),lb=c2.firstElementChild,sp=document.getElementById('spot');let X=innerWidth/2,Y=innerHeight/2,x2=X,y2=Y;
+addEventListener('pointermove',e=>{X=e.clientX;Y=e.clientY;cu.style.transform='translate('+X+'px,'+Y+'px)';sp.style.transform='translate('+X+'px,'+Y+'px)'});
+(function cl(){x2+=(X-x2)*.16;y2+=(Y-y2)*.16;c2.style.transform='translate('+x2+'px,'+y2+'px)'+(c2.classList.contains('p')?' scale(.8)':'');requestAnimationFrame(cl)})();
+document.addEventListener('pointerover',e=>{const a=e.target.closest('a,button,.chip,.tags span');if(a){c2.classList.add('h');lb.textContent=a.matches('.tags span,.chip')?'✦':'Click'}else c2.classList.remove('h')});
+addEventListener('pointerdown',()=>c2.classList.add('p'));addEventListener('pointerup',()=>c2.classList.remove('p'));
+// magnetic
+document.querySelectorAll('.btn,.mail').forEach(b=>{b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.translate=((e.clientX-r.left-r.width/2)*.3)+'px '+((e.clientY-r.top-r.height/2)*.4)+'px'});b.addEventListener('pointerleave',()=>b.style.translate='')});
+function sk(){document.querySelectorAll(".win").forEach(w=>w.style.setProperty("--k",w.querySelector(".vw").clientWidth/440))}sk();addEventListener("resize",sk);
+
+document.querySelectorAll('.acc .row').forEach(r=>{const b=r.querySelector('button'),o=()=>document.querySelectorAll('.acc .row').forEach(x=>x.classList.toggle('on',x===r));b.addEventListener('click',o);if(matchMedia('(hover:hover)').matches)b.addEventListener('pointerenter',o)});
+let si=0;const sts=[...document.querySelectorAll('.stp>div')],tb=[...document.querySelectorAll('.trk button')];
+function setS(i){si=i;sts.forEach((e,k)=>e.classList.toggle('on',k===i));tb.forEach((e,k)=>e.classList.toggle('on',k===i))}
+tb.forEach((b,k)=>b.addEventListener('click',()=>setS(k)));setS(0);setInterval(()=>{if(document.querySelector('.s4').style.visibility!=='hidden')setS((si+1)%4)},3200);
+document.querySelectorAll('.cp').forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.c;Promise.resolve().then(()=>navigator.clipboard.writeText(v)).catch(()=>{}).then(()=>{b.dataset.t=b.dataset.t||b.textContent;b.textContent='Copied ✓';setTimeout(()=>b.textContent=b.dataset.t,1600)})}));
+
+function tm(e){const q=e.touches[0];mx=q.clientX/innerWidth-.5;my=q.clientY/innerHeight-.5;GL.style.setProperty('--gx',(q.clientX/innerWidth*100)+'%');GL.style.setProperty('--gy',(q.clientY/innerHeight*100)+'%')}
+addEventListener('touchstart',tm,{passive:true});addEventListener('touchmove',tm,{passive:true});addEventListener('touchend',()=>{mx=0;my=0});
+document.addEventListener('mouseleave',()=>{mx=0;my=0});
+addEventListener('pointermove',e=>{if(e.pointerType!=='touch'){GL.style.setProperty('--gx',(e.clientX/innerWidth*100)+'%');GL.style.setProperty('--gy',(e.clientY/innerHeight*100)+'%')}});
+// starfield
+const c=document.getElementById('c'),x=c.getContext('2d');let W,H,S=[];
+function rs(){W=c.width=innerWidth;H=c.height=innerHeight;S=Array.from({length:90},()=>({x:Math.random()*2-1,y:Math.random()*2-1,z:Math.random()}))}
+rs();addEventListener('resize',rs);
+(function st(){x.clearRect(0,0,W,H);const sp=.0016+Math.abs(tgt-cur)*.06;
+ S.forEach(s=>{s.z-=sp;if(s.z<=.02)s.z=1;const k=.5/s.z,px=W/2+s.x*W*k*.5,py=H/2+s.y*H*k*.5,r=Math.max(.3,(1-s.z)*2.2);
+  x.fillStyle=s.x>0?'rgba(230,207,159,'+(1-s.z)+')':'rgba(180,160,255,'+(1-s.z)+')';x.fillRect(px,py,r,r)});
+ requestAnimationFrame(st)})();
+</script></body></html>
